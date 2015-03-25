@@ -1,0 +1,15 @@
+The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+
+First we use the OpenSSH SSH client to remotely login to the game server:
+  ssh bandit0@bandit.labs.overthewire.org
+  password: bandit0
+  
+Once in, we list the contents of the current/working directory:
+  ls
+
+To read the file we use a command to concatenate the file and print on the standard output:
+
+  cat readme
+
+Which gives us the password for bandit1:
+  boJ9jbbUNNfktd78OOpsqOltutMc3MY1
