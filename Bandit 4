@@ -1,0 +1,9 @@
+The password for the next level is stored in the only human-readable file in the inhere directory.
+Tip: if your terminal is messed up, try the “reset” command.
+
+If there were more files I might script this, however I just ran the "file" command on the individual files until I found the right one
+
+  file ./-file07
+reveals ASCII text as the file type
+  cat ./-file07
+gives us the password for bandit5 / koReBOKuIDDepwhWk7jZC0RTdopnAYKh
