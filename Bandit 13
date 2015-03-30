@@ -1,0 +1,13 @@
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14.
+For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level.
+Note: localhost is a hostname that refers to the machine you are working on.
+
+A quick
+ ls
+reveals that the sshkey.private is conveniently stored in our home directory.
+Using OpenSSH with the -i option in order to submit an identity file, we can log in as bandit14
+  ssh bandit14@localhost -i sshkey.private
+now we're logged in and have permissions to read the password file for bandit14
+
+  cat /etc/bandit_pass/bandit14
+returns the password for bandit14 / 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
