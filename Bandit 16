@@ -50,7 +50,7 @@ I stuck this in a new file in the /tmp directory
   vi /tmp/sshkey17.private (copy in the key, including header and footer!)
   cd /tmp
 
-If at this point you try to use your key to ssh to the next level, you will be presented with a bad permissions error because your key file is too open to the world. Currently OpenSSH tells us the file permissions are 664, meaning rw-rw-r-- for user, group, and world respectively.
+If at this point you try to use your key to ssh to the next level, you will be presented with a bad permissions error because your key file is too open to the world. Currently OpenSSH tells us the file permissions are 664, meaning rw-rw-r-- for user, group, and world respectively. We can use the 'chmod' or 'change file mod bits' command to change file permissions as follows:
   chmod 600 sshkey17.private
 changes our permissions to rw------- (for a breakdown of chmod permissions, check out www.draac.com/chmodchart.html)
 
