@@ -47,7 +47,7 @@ vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 -----END RSA PRIVATE KEY-----
 
 I stuck this in a new file in the /tmp directory
-  vi /tmp/sshkey17.private
+  vi /tmp/sshkey17.private (copy in the key, including header and footer!)
   cd /tmp
 
 If at this point you try to use your key to ssh to the next level, you will be presented with a bad permissions error because your key file is too open to the world. Currently OpenSSH tells us the file permissions are 664, meaning rw-rw-r-- for user, group, and world respectively.
