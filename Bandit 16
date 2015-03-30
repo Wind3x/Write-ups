@@ -15,7 +15,7 @@ if the list were longer we might script this next part, however there are only 5
   openssl s_client -connect localhost:<port> (try each port until you find the one that does more than echo your input (31790))
   
   openssl s_client -connect localhost:31790
-  cluFn7wTiGryunymYOu4RcffSxQluehd [enter]
+  cluFn7wTiGryunymYOu4RcffSxQluehd (password for bandit16) [enter]
 returns a RSA key:
 
 -----BEGIN RSA PRIVATE KEY-----
