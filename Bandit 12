@@ -1,0 +1,54 @@
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed
+For this level it may be useful to create a directory under /tmp in which you can work using mkdir.
+For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+
+Ugh. This.
+
+First, due to directory permissions, etc. we need to copy the file to a folder we create in the tmp directory so we can manipulate data.txt multiple times, creating new files in the process:
+  mkdir /tmp/Wind3x
+to make a directory in the /tmp directory
+  cp data.txt /tmp/Wind3x
+to make a copy of data.txt in the directory we just created
+  cd /tmp/Wind3x
+to navigate to our directory  
+
+So let's start by reversing the hexdump with 'xxd' and the '-revert' option:
+  xxd -r data.txt data1
+  
+  file data1
+tells us our new file is gzip compressed data...in order to avoid suffix headaches with 'gunzip' I simply
+  zcat data1 >> data2
+  
+  file data2
+tells us our data2 file is bzip2 compressed data... rinse and repeat
+  bzcat data2 >> data3
+  file data3
+is now gzip compressed data
+
+  zcat data3 >> data4
+  file data4
+reveals "POSIX tar archive" and I believe most people will reccommend the -xvf options for extract, verbose, and file respectively
+
+  tar -xvf data4
+gives us data5.bin
+  file data5.bin
+reveals another tar archive
+  tar -xvf data5.bin
+gives us data6.bin
+  file data6.bin
+reveals another bzip2 compressed file
+
+  bzcat data6.bin >> data7
+  file data7
+another tar archive
+
+  tar -xvf data7
+  file data8.bin
+more gzip compressed data...
+
+ zcat data8.bin >> data9
+ file data9
+ASCII text. Finally.
+
+  cat data9
+provides us the password to bandit13 / 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
