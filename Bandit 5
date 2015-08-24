@@ -1,0 +1,10 @@
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties: 
+human-readable - 1033 bytes in size - not executable
+
+Using the find command with the -size option and tacking on a 'c' to the end of the expected size to specify bytes intead of block size
+  find -size 1033c
+gives us ./inhere/maybehere07/.file2
+  cat ./inhere/maybehere07/.file2
+gives us the password for bandit6 / DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+  
+If you really wanted to verify the human-readable requirement you could run 'file' on the file revealing 'ASCII text'
