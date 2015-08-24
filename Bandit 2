@@ -1,0 +1,4 @@
+The password for the next level is stored in a file called spaces in this filename located in the home directory
+
+  cat "spaces in this filename"
+gives us the password for bandit3 / UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
