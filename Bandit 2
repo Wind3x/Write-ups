@@ -2,5 +2,10 @@ http://overthewire.org/wargames/bandit/bandit3.html
 
 The password for the next level is stored in a file called spaces in this filename located in the home directory
 
+You must either surround the filename in quotes or escape the spaces:
+
   cat "spaces in this filename"
+OR
+  cat spaces\ in\ this\ filename
+  
 gives us the password for bandit3 / UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
