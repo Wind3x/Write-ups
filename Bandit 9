@@ -1,3 +1,5 @@
+http://overthewire.org/wargames/bandit/bandit10.html
+
 The password for the next level is stored in the file data.txt in one of the few human-readable strings, beginning with several ‘=’ characters.
 
 As hinted in the instructions, running 'strings' on data.txt will print the strings of printable characters in the file. Turns out there are a few and therefore 'grep' is our friend.
