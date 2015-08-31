@@ -1,8 +1,10 @@
+http://overthewire.org/wargames/bandit/bandit16.html
+
 The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
 
 Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -quiet and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
 
-To start we will be implementing a generic SSL/TLS client using OpenSSL. Include the -connect option to specify the host and port to connect to (else default is localhost on 4433). Include the -quiet option to inhibit printing of sessioin and cert info, as well as to inhibit shutting down the connection when end of file is reached in the input. (If you attempt the connection without the -quiet option, you will get the error mentioned above. The -quiet option implicity adds the -ign_eof flag which I believe prevents your input from being prefixed with a 'B' and breaking the connection somehow. You are welcome to research this further and tell me that I am wrong and why).
+To start we will be implementing a generic SSL/TLS client using OpenSSL. Include the -connect option to specify the host and port to connect to (else default is localhost on 4433). Include the -quiet option to inhibit printing of session and cert info, as well as to inhibit shutting down the connection when end of file is reached in the input. (If you attempt the connection without the -quiet option, you will get the error mentioned above. The -quiet option implicity adds the -ign_eof flag which I believe prevents your input from being prefixed with a 'B' and breaking the connection somehow. You are welcome to research this further and tell me that I am wrong and why).
   openssl s_client -connect localhost:30001 -quiet
   BfMYroe26WYalil77FoDi9qh59eK5xNr (password form bandit15)
 gives us the password for bandit16 / cluFn7wTiGryunymYOu4RcffSxQluehd
