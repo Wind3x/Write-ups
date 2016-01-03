@@ -9,3 +9,6 @@ OR
   cat spaces\ in\ this\ filename
   
 gives us the password for bandit3 / UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+But the easieset way is to use tab completion:
+  cat sp[tab] should auto-complete this command for you, useful for many situations (stop typing your full filenames!)
