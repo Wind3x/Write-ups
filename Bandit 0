@@ -12,7 +12,7 @@ First we use the OpenSSH SSH client to remotely login to the game server:
 Once in, we list the contents of the current/working directory:
   ls
 
-To read the file we use a command to concatenate the file and print on the standard output:
+To read the file we use a command to concatenate the file and print to standard output:
 
   cat readme
 
