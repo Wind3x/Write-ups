@@ -2,8 +2,12 @@ http://overthewire.org/wargames/bandit/bandit4.html
 
 The password for the next level is stored in a hidden file in the inhere directory.
 
+I usually check to see what's in my current directory with ls, revealing the inhere directory.
+
 First we switch directories with
   cd inhere
+
+Another ls reveals nothing.
 
 A quick list directories -all:
   ls -a
