@@ -9,3 +9,14 @@ If there were more files I might script this, however I just ran the "file" comm
 reveals ASCII text as the file type
   cat ./-file07
 gives us the password for bandit5 / koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+
+Edit:
+
+  for i in $(ls); do file -- $i; done
+
+Gives us which file is ASCII text
+Had to use -- to delimit the option list since the filenames start with -
+
+"A delimiter is a sequence of one or more characters used to specify the boundary between separate,
+independent regions in plain text or other data streams. 
+An example of a delimiter is the comma character, which acts as a field delimiter in a sequence of comma-separated values."
