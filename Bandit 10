@@ -4,3 +4,5 @@ The password for the next level is stored in the file data.txt, which contains b
 
   base64 -d data.txt
 decodes the file and gives us the password for bandit11 / IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+For more info on base64: https://en.wikipedia.org/wiki/Base64
