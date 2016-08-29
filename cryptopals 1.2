@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+#After much googling and shenanigans trying to get a solution that would work with Python 3 (Python 2 is much simpler) I found the following on StackOverflow: 
+
+#Strings in Python 3 are unicode objects therefore a string of hexadecimal characters does not correspond to the binary representation of the integer in memory (which you need to use XOR).
+
+#With this in mind, you could interpret the strings as base-16 integers first, XOR them, and convert the resulting integer back to a hex string:
+
+def fixed_xor(string1, string2):
+  return hex(int(string1, 16) ^ int(string2, 16))
