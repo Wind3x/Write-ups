@@ -1,6 +1,6 @@
 # Write-ups
 
-'Morality lies in the application of knowledge"
+"Morality lies in the application of knowledge"
 
 -Jon Erickson
 
