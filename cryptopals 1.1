@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+#Authored by Windex 1472424400
+#http://cryptopals.com/sets/1/challenges/1
+import binascii
+import base64
+
+#orig_str = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
+
+def hex_to_b64(orig_str):
+  raw_bytes = binascii.unhexlify(orig_str)
+  #b"I'm killing your brain like a poisonous mushroom"
+  
+  solution_str = base64.b64encode(raw_bytes)
+  #b'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
+  
+  return solution_str
