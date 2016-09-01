@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import single_byte_xor as sbx
+
+#Accepts a file of ciphertext strings
+#Prints out the top 3 combinations of byte key, ciphertext,
+# resulting plaintext, and English score - based on score
+def solve(filename):
+  f = open(filename, 'r')
+  ciphertexts = []
+  
+  for line in f:
+    ciphertexts.append(line.strip())
+  
+  f.close()
+  solutions = []
+
+  for ciphertext in ciphertexts:
+    for i in range(128):
+      plaintext = sbx.sbx(ciphertext, i)
+      score = sbx.engFreqMatchScore(plaintext)
+      solutions.append((score, plaintext, i, ciphertext))
+
+    sorted_solutions = sorted(solutions, key=lambda x: x[0], reverse=True)
+
+  print("(Score, Plaintext, ASCII key, Ciphertext)")
+  for i in range(3):
+    print(sorted_solutions[i])
+
+##########
+# Prompt #
+##########
+
+#One of the 60-character strings in this file has been encrypted by single-character XOR.
+
+#Find it.
+
+#(Your code from #3 should help.)
