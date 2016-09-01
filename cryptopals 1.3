@@ -1,0 +1,116 @@
+#!/usr/bin/python
+
+#hex-encoded string 1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736
+
+#Accepts a hex-encoded string of ciphertext and an ascii value as the key
+#XORs each byte of ciphertext against the key and returns a string of plaintext
+def sbx(ciphertext, key):
+  cipher_bytes = bytes.fromhex(ciphertext)
+  XOR_results = []
+  plaintext = ""
+
+  for byte in cipher_bytes:
+    XOR_results.append(byte ^ key)
+
+  for ascii_value in XOR_results:
+    plaintext += chr(ascii_value)
+
+  return plaintext
+
+#Frequency taken from http://en.wikipedia.org/wiki/Letter_frequency
+#Code taken from https://inventwithpython.com/hacking/chapter20.html
+englishLetterFreq = {'E': 12.70, 'T': 9.06, 'A': 8.17, 'O': 7.51, 'I': 6.97, 'N': 6.75, 'S': 6.33, 'H': 6.09, 'R': 5.99, 'D': 4.25, 'L': 4.03, 'C': 2.78, 'U': 2.76, 'M': 2.41, 'W': 2.36, 'F': 2.23, 'G': 2.02, 'Y': 1.97, 'P': 1.93, 'B': 1.29, 'V': 0.98, 'K': 0.77, 'J': 0.15, 'X': 0.15, 'Q': 0.10, 'Z': 0.07}
+ETAOIN = 'ETAOINSHRDLCUMWFGYPBVKJXQZ'
+CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+#Accepts a string
+#Returns a dictionary with each letter as a key
+#  and counts of appearences within the string as values
+def getCharacterCount(text):
+  count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0, 'G': 0, 'H': 0, 'I': 0, 'J': 0, 'K': 0, 'L': 0, 'M': 0, 'N': 0, 'O': 0, 'P': 0, 'Q': 0, 'R': 0, 'S': 0, 'T': 0, 'U': 0, 'V': 0, 'W': 0, 'X': 0, 'Y': 0, 'Z': 0}
+
+  for char in text.upper():
+    if char in CHARACTERS:
+      count[char] += 1
+
+  return count 
+
+#For use in sorting later on
+#Accepts a pair of items (key, value)
+#Returns the item at index 0
+def indexZero(item):
+  return item[0]
+
+#Accepts a string
+#Returns a string of characters in descending order by frequency
+def getFrequencyOrder(text):
+  charToFreq = getCharacterCount(text) #Dict of char -> freq count
+  freqToChar = {} #Dict of freq -> char(s) 
+
+  for char in CHARACTERS:
+    if charToFreq[char] not in freqToChar:
+      freqToChar[charToFreq[char]] = [char]
+    else:
+      freqToChar[charToFreq[char]].append(char)
+
+  #put each list of letters in reverse "ETAOIN" order, and then
+  # convert it to a string
+  for freq in freqToChar:
+    freqToChar[freq].sort(key=ETAOIN.find, reverse=True)
+    freqToChar[freq] = ''.join(freqToChar[freq])
+ 
+    #convert the freqToChar dictionary to a list of tuple
+    # pairs (key, value), then sort them
+    freqPairs = list(freqToChar.items())
+    freqPairs.sort(key=indexZero, reverse=True)
+ 
+    #Extract all letters and put them in a string
+    freqOrder = []
+    for freqPair in freqPairs:
+      freqOrder.append(freqPair[1])
+
+  return ''.join(freqOrder)
+
+#Accepts a string
+#Returns the number of matches that the string
+# has when the character frequency is compared to
+# English character frequency. A "match" is how
+# many of its six most freqment and six least
+# frequent characters are among the six most/least
+# frequent characters for English
+def engFreqMatchScore(string):
+  freqOrder = getFrequencyOrder(string)
+  matchScore = 0
+
+  # Find how many matches for the six most common letters there are.
+  for commonLetter in ETAOIN[:6]:
+    if commonLetter in freqOrder[:6]:
+      matchScore += 1
+
+  # Find how many matches for the six least common letters there are.
+  for uncommonLetter in ETAOIN[-6:]:
+    if uncommonLetter in freqOrder[-6:]:
+      matchScore += 1
+
+  return matchScore
+
+#Function for sorting a list based on
+# first index of each tuple
+def indexZeroZero(item):
+  return item[0][0]
+
+#Accepts a string of hex-encoded ciphertext
+#Prints out possible plaintext strings in 
+# order ranked by English match score
+def solve(ciphertext):
+  solutions = []
+  for i in range(128):
+    plaintext = sbx(ciphertext, i)
+    score = engFreqMatchScore(plaintext)
+    solutions.append((score, plaintext, i))
+  
+  sorted_solutions = sorted(solutions, key=lambda x: x[0], reverse=True) 
+  
+  print("(Score, Plaintext, ASCII key)")
+  for solution in sorted_solutions:
+    print(solution) 
