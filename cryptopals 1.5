@@ -1,0 +1,49 @@
+#!/usr/bin/python
+
+import binascii
+from fixed_xor import fixed_xor
+
+test = '''Burning 'em, if you ain't quick and nimble
+I go crazy when I hear a cymbal'''
+
+#Accepts a string
+#Returns a hex-encoded string
+def str_to_hex(string):
+  hex_bytes = binascii.hexlify(string.encode())
+  return str(hex_bytes, 'ascii')
+
+#Accepts a string of plaintext and a key
+#Returns the hex-encoded results of performing
+# a repeating-XOR using the given key against
+# the plaintext  
+def repeat_xor(plaintext, key):
+  key_string = ''
+  iterations = int(len(plaintext)/len(key)) 
+  extra = len(plaintext) % len(key)
+
+  for i in range(iterations):
+    key_string += key
+
+  for i in range(extra):
+    key_string += key[i]
+  
+  xor_hex = fixed_xor(str_to_hex(plaintext), str_to_hex(key_string))
+  if len(xor_hex) < len(str_to_hex(plaintext)):
+    xor_hex = '0' + xor_hex #handle case where leading 0 is chopped off by hex()
+   
+  return xor_hex
+
+#Here is the opening stanza of an important work of the English language:
+#
+#Burning 'em, if you ain't quick and nimble
+#I go crazy when I hear a cymbal
+#
+#Encrypt it, under the key "ICE", using repeating-key XOR.
+#
+#In repeating-key XOR, you'll sequentially apply each byte of the key; the first byte of plaintext will be XOR'd against I, the next C, the next E, then I again for the 4th byte, and so on.
+#
+#It should come out to:
+#
+#0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272
+#a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f
+#Encrypt a bunch of stuff using your repeating-key XOR function. Encrypt your mail. Encrypt your password file. Your .sig file. Get a feel for it. I promise, we aren't wasting your time with this.
